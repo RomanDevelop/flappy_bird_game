@@ -1,3 +1,4 @@
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/timer.dart';
 import 'package:flutter_game_test/components/background.dart';
@@ -6,7 +7,7 @@ import 'package:flutter_game_test/components/ground.dart';
 import 'package:flutter_game_test/components/pipe_group.dart';
 import 'package:flutter_game_test/game/configuration.dart';
 
-class FlappyBirdGame extends FlameGame {
+class FlappyBirdGame extends FlameGame with TapDetector {
   FlappyBirdGame();
 
   late Bird bird;
@@ -21,6 +22,12 @@ class FlappyBirdGame extends FlameGame {
     ]);
 
     interval.onTick = () => add(PipeGroup());
+  }
+
+  @override
+  void onTap() {
+    super.onTap();
+    bird.fly();
   }
 
   @override
